@@ -50,7 +50,7 @@ jobs:
           helm s3 push ./helm-demo-$VERSION.tgz helm-demo 
   release_github:
     name: Publish to GitHub Releases
-    needs: release
+    needs: release_helm_chart
     runs-on: ubuntu-latest
     permissions:
       contents: write
