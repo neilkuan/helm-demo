@@ -1,0 +1,47 @@
+name: Release Helm Charts
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: Add dependency helm chart repo
+        env:
+          AWS_S3: ${{ secrets.AWS_S3 }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        run: |
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh --version v3.13.1
+          helm version
+          helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.15.1
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add helm-demo ${AWS_S3}
+
+      - name: Release helm chart
+        env:
+          AWS_S3: ${{ secrets.AWS_S3 }}
+        run: |
+          export TAG=${GITHUB_REF#refs/*/}
+          export VERSION=$(echo $TAG | cut -d 'v' -f 2)
+          export CHECK_CHART_VERSION=$(cat Chart.yaml | grep '^version: ' | cut -d ' ' -f 2)
+          echo "TAG=$TAG"
+          echo "VERSION=$VERSION"
+          echo "CHECK_CHART_VERSION=$CHECK_CHART_VERSION"
+          [[ $VERSION != $CHECK_CHART_VERSION ]] && exit 1 || echo "check ok"
+          helm package .
+          helm s3 push ./helm-demo-$VERSION.tgz helm-demo 
+
