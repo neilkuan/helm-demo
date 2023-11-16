@@ -42,6 +42,7 @@ jobs:
           echo "VERSION=$VERSION"
           echo "CHECK_CHART_VERSION=$CHECK_CHART_VERSION"
           [[ $VERSION != $CHECK_CHART_VERSION ]] && exit 1 || echo "check ok"
+          helm dependency update
           helm package .
           helm s3 push ./helm-demo-$VERSION.tgz helm-demo 
 
