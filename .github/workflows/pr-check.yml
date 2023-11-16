@@ -1,0 +1,32 @@
+name: PR Check Commit Chart.yaml
+
+on:
+  push:
+    paths:
+      - '!.github/workflows/**'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: get-changed-files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+      - run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+              if [[ ${changed_file} == "Chart.yaml" ]];then
+                  export count=1
+              else:
+                  export count=0
+              fi
+          done
+          [[ $count == 0 ]] && echo "Please commit Chart.yaml"
+
