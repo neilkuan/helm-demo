@@ -28,6 +28,7 @@ jobs:
 
       - name: Check commit Chart.yaml
         run: |
+          touch change.txt
           for file in ${{ steps.changed-markdown-files.outputs.all_changed_files }}; do
             echo "$file" >> change.txt
           done
