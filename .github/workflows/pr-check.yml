@@ -22,14 +22,10 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v40
-        with:
-          files: |
-            Chart.yaml
-
       - name: Check commit Chart.yaml
         run: |
           touch change.txt
-          for file in ${{ steps.changed-markdown-files.outputs.all_changed_files }}; do
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file" >> change.txt
           done
           grep Chart.yaml change.txt && exit 1 || echo "Nice Job"
