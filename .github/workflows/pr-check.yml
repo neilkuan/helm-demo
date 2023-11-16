@@ -3,10 +3,13 @@ name: PR Check Commit Chart.yaml
 on:
   push:
     paths:
+      - '*'
       - '!.github/workflows/**'
   pull_request:
-    paths: 
-    - '!.github/workflows/**'
+    paths:
+      - '*'
+      - '!.github/workflows/**'
+      
 
 jobs:
   release:
