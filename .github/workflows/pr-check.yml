@@ -1,10 +1,6 @@
 name: PR Check Commit Chart.yaml
 
 on:
-  push:
-    paths:
-      - '*'
-      - '!.github/workflows/**'
   pull_request:
     paths:
       - '*'
@@ -27,11 +23,10 @@ jobs:
         id: files
         uses: jitterbit/get-changed-files@v1
       - run: |
+          export count=0
           for changed_file in ${{ steps.files.outputs.all }}; do
               if [[ ${changed_file} == "Chart.yaml" ]];then
                   export count=1
-              else:
-                  export count=0
               fi
           done
           [[ $count == 0 ]] && echo "Please commit Chart.yaml"
