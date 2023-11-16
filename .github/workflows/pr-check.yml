@@ -28,4 +28,4 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file" >> change.txt
           done
-          grep Chart.yaml change.txt && exit 1 || echo "Nice Job"
+          grep Chart.yaml change.txt && echo "Nice Job" || echo "Please commit Chart.yaml" && exit 1 
