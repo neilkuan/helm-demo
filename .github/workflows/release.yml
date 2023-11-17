@@ -18,6 +18,14 @@ jobs:
         run: |
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: install helm cli
+        id: install
+        uses: azure/setup-helm@v3.5
+        with:
+          version: 'v3.13.1' # default is latest (stable)
+          #token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
+
       - name: Add dependency helm chart repo
         env:
           AWS_S3: ${{ secrets.AWS_S3 }}
@@ -25,9 +33,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run: |
-          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-          chmod 700 get_helm.sh
-          ./get_helm.sh --version v3.13.1
           helm version
           helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.15.1
           helm repo add bitnami https://charts.bitnami.com/bitnami
