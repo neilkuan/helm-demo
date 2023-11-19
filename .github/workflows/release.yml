@@ -23,7 +23,7 @@ jobs:
         id: install
         uses: azure/setup-helm@v3.5
         with:
-          version: ${{ env.HELM_CLI_VERSION }} # default is latest (stable)
+          version: ${{ vars.HELM_CLI_VERSION }} # default is latest (stable)
           #token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
 
       - name: Add dependency helm chart repo
