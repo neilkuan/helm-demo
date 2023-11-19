@@ -7,7 +7,7 @@ doc.dependencies.forEach( repo => {
 
 const { spawn } = require("child_process");
 for (const repo of repoList) {
-  let helmAddRepo = spawn('helm', [...['repo', 'add'],...repo]);
+  let helmAddRepo = spawn('helm', [...['repo', 'add', '--force-update'],...repo]);
   const helmActionList = [ helmAddRepo];
   for (const action of helmActionList) {
       action.stdout.on("data", data => {
