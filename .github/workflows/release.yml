@@ -23,7 +23,7 @@ jobs:
         id: install
         uses: azure/setup-helm@v3.5
         with:
-          version: 'v3.13.1' # default is latest (stable)
+          version: ${{ env.HELM_CLI_VERSION }} # default is latest (stable)
           #token: ${{ secrets.GITHUB_TOKEN }} # only needed if version is 'latest'
 
       - name: Add dependency helm chart repo
@@ -35,8 +35,8 @@ jobs:
         run: |
           helm version
           helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.15.1
-          helm repo add bitnami https://charts.bitnami.com/bitnami
-          helm repo add helm-demo ${AWS_S3}
+          
+          npx zx get-helm-depends-update.mjs
 
       - name: Release helm chart
         env:
