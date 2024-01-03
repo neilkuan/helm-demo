@@ -3,7 +3,21 @@ entries:
   helm-demo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:24:49.196897363Z"
+    created: "2024-01-03T13:38:46.055024338Z"
+    dependencies:
+    - name: nginx
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.4.2
+    description: A Helm chart for Kubernetes
+    digest: 2c93e33a10be0db23557681b449c16969ff4bc6efef576070bfa09e537847508
+    name: helm-demo
+    type: application
+    urls:
+    - https://neilkuan.github.io/helm-demo/helm-demo-0.0.20.tgz
+    version: 0.0.20
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-01-03T13:38:46.051532662Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -17,7 +31,7 @@ entries:
     version: 0.0.19
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:24:49.194372158Z"
+    created: "2024-01-03T13:38:46.048934795Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -31,7 +45,7 @@ entries:
     version: 0.0.18
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:24:49.191782743Z"
+    created: "2024-01-03T13:38:46.046271575Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -45,7 +59,7 @@ entries:
     version: 0.0.17
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:24:49.18844691Z"
+    created: "2024-01-03T13:38:46.042796437Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -57,4 +71,4 @@ entries:
     urls:
     - https://neilkuan.github.io/helm-demo/helm-demo-0.0.16.tgz
     version: 0.0.16
-generated: "2024-01-03T13:24:49.185649686Z"
+generated: "2024-01-03T13:38:46.039980711Z"
