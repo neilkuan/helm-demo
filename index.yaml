@@ -3,7 +3,21 @@ entries:
   helm-demo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:11:44.229917505Z"
+    created: "2024-01-03T13:21:28.243725929Z"
+    dependencies:
+    - name: nginx
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.4.2
+    description: A Helm chart for Kubernetes
+    digest: 40f2129e9db750ef2d16bc514cce6444305c13b772806a60b5a91a2ed38a4c5a
+    name: helm-demo
+    type: application
+    urls:
+    - https://46012524.github.io/helm-demo/helm-demo-0.0.18.tgz
+    version: 0.0.18
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-01-03T13:21:28.240671759Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -17,7 +31,7 @@ entries:
     version: 0.0.17
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:11:44.227219074Z"
+    created: "2024-01-03T13:21:28.238007415Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -29,45 +43,4 @@ entries:
     urls:
     - https://46012524.github.io/helm-demo/helm-demo-0.0.16.tgz
     version: 0.0.16
-  nginx:
-  - annotations:
-      category: Infrastructure
-      images: |
-        - name: git
-          image: docker.io/bitnami/git:2.42.1-debian-11-r0
-        - name: nginx-exporter
-          image: docker.io/bitnami/nginx-exporter:0.11.0-debian-11-r370
-        - name: nginx
-          image: docker.io/bitnami/nginx:1.25.3-debian-11-r1
-      licenses: Apache-2.0
-    apiVersion: v2
-    appVersion: 1.25.3
-    created: "2024-01-03T13:11:44.232146236Z"
-    dependencies:
-    - name: common
-      repository: oci://registry-1.docker.io/bitnamicharts
-      tags:
-      - bitnami-common
-      version: 2.x.x
-    description: NGINX Open Source is a web server that can be also used as a reverse
-      proxy, load balancer, and HTTP cache. Recommended for high-demanding sites due
-      to its ability to provide faster content.
-    digest: 147599c1023d9422daff1674fa45cdee606b2beed97b3a310dfc636765dee0bc
-    home: https://bitnami.com
-    icon: https://bitnami.com/assets/stacks/nginx/img/nginx-stack-220x234.png
-    keywords:
-    - nginx
-    - http
-    - web
-    - www
-    - reverse proxy
-    maintainers:
-    - name: VMware, Inc.
-      url: https://github.com/bitnami/charts
-    name: nginx
-    sources:
-    - https://github.com/bitnami/charts/tree/main/bitnami/nginx
-    urls:
-    - https://46012524.github.io/helm-demo/charts/nginx-15.4.2.tgz
-    version: 15.4.2
-generated: "2024-01-03T13:11:44.223643027Z"
+generated: "2024-01-03T13:21:28.234604405Z"
