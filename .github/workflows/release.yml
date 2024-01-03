@@ -9,6 +9,10 @@ jobs:
   release_helm_chart:
     name: Releases Helm Chart
     runs-on: ubuntu-latest
+    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
+    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,7 +57,13 @@ jobs:
           [[ $VERSION != $CHECK_CHART_VERSION ]] && exit 1 || echo "check ok"
           helm dependency update
           helm package .
-          helm s3 push ./helm-demo-$VERSION.tgz helm-demo 
+          helm s3 push ./helm-demo-$VERSION.tgz helm-demo
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: .
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
   release_github:
     name: Publish to GitHub Releases
     needs: release_helm_chart
@@ -76,29 +86,3 @@ jobs:
         run: |
           export VERSION=$(cat Chart.yaml | grep '^version: ' | cut -d ' ' -f 2)
           gh release create v${VERSION} --generate-notes --repo $GITHUB_REPOSITORY
-
-  release-github-pages:
-    needs: release_github
-    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
-      - name: Configure Git
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-
-      - name: Install Helm
-        uses: azure/setup-helm@v3
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
