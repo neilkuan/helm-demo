@@ -58,12 +58,17 @@ jobs:
           helm dependency update
           helm package .
           helm s3 push ./helm-demo-$VERSION.tgz helm-demo
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        with:
-          charts_dir: .
+      - name: Release helm chart to Github Pages
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: |
+          git checkout gh-pages
+          export REPOSITORY=$(echo ${GITHUB_REPOSITORY} | cut -d "/" -f 2)
+          helm repo index --url https://${GITHUB_REPOSITORY_OWNER_ID}.github.io/${REPOSITORY} .
+          git add .
+          VERSION=$(cat Chart.yaml | grep "^version:" | awk '{print $2}')
+          git commit -m "gh page release ${VERSION}"
+          git push origin gh-pages
   release_github:
     name: Publish to GitHub Releases
     needs: release_helm_chart
