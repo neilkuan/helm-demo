@@ -66,7 +66,8 @@ jobs:
           export REPOSITORY=$(echo ${GITHUB_REPOSITORY} | cut -d "/" -f 2)
           helm repo index --url https://${GITHUB_REPOSITORY_OWNER_ID}.github.io/${REPOSITORY} .
           git add .
-          VERSION=$(cat Chart.yaml | grep "^version:" | awk '{print $2}')
+          export TAG=${GITHUB_REF#refs/*/}
+          export VERSION=$(echo $TAG | cut -d 'v' -f 2)
           git commit -m "gh page release ${VERSION}"
           git push origin gh-pages
   release_github:
