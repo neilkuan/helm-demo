@@ -65,7 +65,7 @@ jobs:
           git checkout gh-pages
           export REPOSITORY=$(echo ${GITHUB_REPOSITORY} | cut -d "/" -f 2)
           rm -rf charts/
-          helm repo index --url https://${GITHUB_REPOSITORY_OWNER_ID}.github.io/${REPOSITORY} .
+          helm repo index --url https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPOSITORY} .
           git add .
           export TAG=${GITHUB_REF#refs/*/}
           export VERSION=$(echo $TAG | cut -d 'v' -f 2)
