@@ -5,7 +5,7 @@ on:
     paths:
       - '*'
       - '!.github/workflows/**'
-      
+      - '!README.md'
 
 jobs:
   check:

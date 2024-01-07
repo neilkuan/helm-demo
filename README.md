@@ -40,7 +40,7 @@ git switch gh-pages
 
 git pull origin gh-pages
 
-rm -rf charts
+rm -rf charts/
 
 helm repo index --url https://neilkuan.github.io/helm-demo .
 
