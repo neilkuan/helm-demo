@@ -3,7 +3,21 @@ entries:
   helm-demo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:38:46.055024338Z"
+    created: "2024-01-07T02:55:47.126700538Z"
+    dependencies:
+    - name: nginx
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.4.2
+    description: A Helm chart for Kubernetes
+    digest: f0f298bdc096153182c2925f0e5da0282d1a7b46ca15472f28fc464bd8db4285
+    name: helm-demo
+    type: application
+    urls:
+    - https://neilkuan.github.io/helm-demo/helm-demo-0.0.21.tgz
+    version: 0.0.21
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-01-07T02:55:47.123641256Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -17,7 +31,7 @@ entries:
     version: 0.0.20
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:38:46.051532662Z"
+    created: "2024-01-07T02:55:47.120988367Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -31,7 +45,7 @@ entries:
     version: 0.0.19
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:38:46.048934795Z"
+    created: "2024-01-07T02:55:47.118479407Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -45,7 +59,7 @@ entries:
     version: 0.0.18
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:38:46.046271575Z"
+    created: "2024-01-07T02:55:47.115250402Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -59,7 +73,7 @@ entries:
     version: 0.0.17
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2024-01-03T13:38:46.042796437Z"
+    created: "2024-01-07T02:55:47.112658587Z"
     dependencies:
     - name: nginx
       repository: https://charts.bitnami.com/bitnami
@@ -71,4 +85,4 @@ entries:
     urls:
     - https://neilkuan.github.io/helm-demo/helm-demo-0.0.16.tgz
     version: 0.0.16
-generated: "2024-01-03T13:38:46.039980711Z"
+generated: "2024-01-07T02:55:47.109898849Z"
