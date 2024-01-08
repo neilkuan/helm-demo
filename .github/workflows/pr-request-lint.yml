@@ -17,7 +17,7 @@ jobs:
       contents: read
       id-token: write
     outputs:
-      conclusion: ${{ steps.validate.outputs.conclusion }}
+      conclusion: ${{ steps.build.outputs.conclusion }}
     steps:
       - uses: amannn/action-semantic-pull-request@v5.0.2
         env:
@@ -28,8 +28,8 @@ jobs:
             fix
             chore
           requireScope: false
-      - run: |
-          echo "conclusion=success" >> $GITHUB_OUTPUT
+      - id: build
+        run: echo "conclusion=success" >> $GITHUB_OUTPUT
   update:
     name: Update status job
     runs-on: ubuntu-latest
