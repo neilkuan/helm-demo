@@ -17,7 +17,7 @@ jobs:
       contents: read
       id-token: write
     outputs:
-      conclusion: ${{ steps.build.outputs.conclusion }}
+      conclusion: ${{ steps.validate.outputs.conclusion }}
     steps:
       - uses: amannn/action-semantic-pull-request@v5.0.2
         env:
