@@ -43,7 +43,7 @@ jobs:
         run: "curl -i -v --fail -H \"Accept: application/vnd.github.v3+json\" -H
           \"Authorization: token ${GITHUB_TOKEN}\"
           https://api.github.com/repos/${{ github.repository }}/check-runs -d
-          '{\"name\":\"build\",\"head_sha\":\"${BRANCH_NAME}\",\"status\
+          '{\"name\":\"build\",\"head_sha\":\"${{ github.head_ref || github.ref_name }}\",\"status\
           \":\"completed\",\"conclusion\":\"${{ needs.validate.outputs.conclusion
           }}\",\"output\":{\"title\":\"Created via the pull-request-lint
           workflow.\",\"summary\":\"Action run URL: https://github.com/${{
