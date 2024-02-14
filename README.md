@@ -42,7 +42,8 @@ git pull origin gh-pages
 
 rm -rf charts/
 
-helm repo index --url https://neilkuan.github.io/helm-demo .
+### Use none url 
+helm repo index --url "" .
 
 git add .
 
